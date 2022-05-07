@@ -1,5 +1,6 @@
 package gradeManagement;
 
+import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -7,144 +8,154 @@ import java.util.Set;
 
 /**
  * (2022.05.07)
- * Ãß°¡ÇÏ°í ½ÍÀº ±â´Éµé 
- * 1. Scanner °´Ã¼ÀÇ ¸Ş¼Òµå·Î ÀÔ·Â°ªÀ» ¹ŞÀ» ¶§ ´Ù¸¥ Å¸ÀÔÀÌ µé¾î¿À¸é ´Ù½Ã ÀûÀ¸¶ó°í Ãâ·ÂÇÏ±â. (ÇöÀç´Â ¿¡·¯°¡ ¶°¼­ ÇÁ·Î±×·¥ÀÌ ¸ØÃã)
- * 2. "ÇĞ»ı Á¤º¸ Ãß°¡" ¿¡¼­ Æ¯Á¤ Å°, ¿¹¸¦ µé¸é q ¸¦ ÀÔ·ÂÇßÀ» ¶§±îÁö´Â °è¼Ó Ãß°¡ÇÒ ¼ö ÀÖ°Ô ÇÏ´Â ±â´É. (Ãß°¡¿Ï·á - 22.05.07)
+ * ì¶”ê°€í•˜ê³  ì‹¶ì€ ê¸°ëŠ¥ë“¤ 
+ * 1. Scanner ê°ì²´ì˜ ë©”ì†Œë“œë¡œ ì…ë ¥ê°’ì„ ë°›ì„ ë•Œ ë‹¤ë¥¸ íƒ€ì…ì´ ë“¤ì–´ì˜¤ë©´ ë‹¤ì‹œ ì ìœ¼ë¼ê³  ì¶œë ¥í•˜ê¸°. (í˜„ì¬ëŠ” ì—ëŸ¬ê°€ ë– ì„œ í”„ë¡œê·¸ë¨ì´ ë©ˆì¶¤) (ì¶”ê°€ ì™„ë£Œ - 22.05.08)
+ * 2. "í•™ìƒ ì •ë³´ ì¶”ê°€" ì—ì„œ íŠ¹ì • í‚¤, ì˜ˆë¥¼ ë“¤ë©´ q ë¥¼ ì…ë ¥í–ˆì„ ë•Œê¹Œì§€ëŠ” ê³„ì† ì¶”ê°€í•  ìˆ˜ ìˆê²Œ í•˜ëŠ” ê¸°ëŠ¥. (ì¶”ê°€ ì™„ë£Œ - 22.05.07)
  * 
- * ¾Ë°Ô µÈ Á¡.
- * 1. nextLine()À» ¾²°Ô µÇ¸é ÀÔ·Â°ªÀ» ±â´Ù¸®Áö ¾Ê°í ´ÙÀ½À¸·Î ³Ñ¾î°¡Áø´Ù. next() ¸Ş¼­µå¸¦ »ç¿ëÇØ¼­ ÇØ°á.
- * 2. Àü¿ªº¯¼ö¸¦ ¸Ş¼Òµå¿¡¼­ ¹Ù·Î ¾µ ¼ö ¾ø¾î¼­ Set °´Ã¼¸¦ Å¬·¡½º º¯¼ö·Î ¼±¾ğÇÔ.
- * 3. case ¹®¿¡¼­ {}¸¦ »ç¿ëÇÏÁö ¾ÊÀ¸¸é ·ÎÄÃº¯¼ö¸¦ »ç¿ëÇÒ ¼ö ¾øÀ½.
- * 4. String¿¡¼­ ¹®ÀÚ°ªÀ» ºñ±³ÇÒ ¶§ == ·Î ºñ±³ÇÏ°Ô µÇ¸é ¸Ş¸ğ¸® ÁÖ¼Ò°ªÀ» ºñ±³ÇÏ±â¶§¹®¿¡ equals()¸¦ »ç¿ëÇØ¾ßÇÔ.
+ * ì•Œê²Œ ëœ ì .
+ * 1. nextLine()ì„ ì“°ê²Œ ë˜ë©´ ì…ë ¥ê°’ì„ ê¸°ë‹¤ë¦¬ì§€ ì•Šê³  ë‹¤ìŒìœ¼ë¡œ ë„˜ì–´ê°€ì§„ë‹¤. next() ë©”ì„œë“œë¥¼ ì‚¬ìš©í•´ì„œ í•´ê²°.
+ * 2. ì „ì—­ë³€ìˆ˜ë¥¼ ë©”ì†Œë“œì—ì„œ ë°”ë¡œ ì“¸ ìˆ˜ ì—†ì–´ì„œ Set ê°ì²´ë¥¼ í´ë˜ìŠ¤ ë³€ìˆ˜ë¡œ ì„ ì–¸í•¨.
+ * 3. case ë¬¸ì—ì„œ {}ë¥¼ ì‚¬ìš©í•˜ì§€ ì•Šìœ¼ë©´ ë¡œì»¬ë³€ìˆ˜ë¥¼ ì‚¬ìš©í•  ìˆ˜ ì—†ìŒ.
+ * 4. Stringì—ì„œ ë¬¸ìê°’ì„ ë¹„êµí•  ë•Œ == ë¡œ ë¹„êµí•˜ê²Œ ë˜ë©´ ë©”ëª¨ë¦¬ ì£¼ì†Œê°’ì„ ë¹„êµí•˜ê¸°ë•Œë¬¸ì— equals()ë¥¼ ì‚¬ìš©í•´ì•¼í•¨.
+ * 5. ì‹¤ìˆ˜ë¡œ ì´ë¦„ì„ ìˆ«ìë¡œ ë°›ì•˜ëŠ”ë° í•™ìƒ ì •ë³´ ì‚­ì œë¥¼ í•˜ê²Œ ë˜ë‹ˆ java.util.ConcurrentModificationException ì—ëŸ¬ê°€ ëœ¸.
+ * í•´ë‹¹ Exceptionì€ ì»¬ë ‰ì…˜ ê°ì²´ë¥¼ for loopë¥¼ ì‚¬ìš©í•´ì„œ ìˆœíšŒí•¨ê³¼ ë™ì‹œì—, ì»¬ë ‰ì…˜ ê°ì²´ë¥¼ ìˆ˜ì •í–ˆê¸° ë•Œë¬¸ì— ë°œìƒí•œë‹¤ê³  í•œë‹¤.(ê¼­ ìˆ«ìì—¬ì„œ ëœ¬ê²Œ ì•„ë‹ˆë¼ iteratorì™€ ê´€ë ¨ìˆëŠ”ë“¯)
+ * ì—ëŸ¬ëŠ” ë–´ì§€ë§Œ ë¡œì§ì€ ì˜ ì²˜ë¦¬ë˜ì—ˆê¸° ë•Œë¬¸ì— ì˜ˆì™¸ì²˜ë¦¬í•˜ì˜€ë‹¤.
  */
 public class Management {
 	
-	/* ÇĞ»ıÀ» °ü¸®ÇÒ Å×ÀÌºí »ı¼º */
+	/* í•™ìƒì„ ê´€ë¦¬í•  í…Œì´ë¸” ìƒì„± */
 	private static Set<Student> table = new HashSet<>();
 	
 	public static void main(String[] args) {
 		System.out.println("==================================================");
-		System.out.println("           [   ¼º Àû °ü ¸® ÇÁ ·Î ±× ·¥   ]         	  ");
+		System.out.println("           [   ì„± ì  ê´€ ë¦¬ í”„ ë¡œ ê·¸ ë¨   ]         	  ");
 		System.out.println("==================================================");
 		
 		Scanner sc = new Scanner(System.in);
 		
 		while(true) {
 			
-			System.out.println("1. ÇĞ»ı Á¤º¸ Ãß°¡");
-			System.out.println("2. ¼ºÀûÇ¥ Ãâ·Â");
-			System.out.println("3. ÇĞ»ı Á¤º¸ ¼öÁ¤");
-			System.out.println("4. ÇĞ»ı Á¤º¸ »èÁ¦");
-			System.out.println("5. Á¾·á");
+			System.out.println("1. í•™ìƒ ì •ë³´ ì¶”ê°€");
+			System.out.println("2. ì„±ì í‘œ ì¶œë ¥");
+			System.out.println("3. í•™ìƒ ì •ë³´ ìˆ˜ì •");
+			System.out.println("4. í•™ìƒ ì •ë³´ ì‚­ì œ");
+			System.out.println("5. ì¢…ë£Œ");
 			System.out.println();
 			
-			System.out.print("¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä> ");
+			System.out.print("ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”> ");
 			
-			switch(sc.nextInt()) {
-				/* 1. ÇĞ»ı Á¤º¸ Ãß°¡ */
-				case 1:
-				{	
+			String input = sc.next();
+			
+			try {
+				int inputNum = Integer.parseInt(input);
+		
+				switch (inputNum) {
+				/* 1. í•™ìƒ ì •ë³´ ì¶”ê°€ */
+				case 1: {
 					while (true) {
-						System.out.println("\n[Á¤º¸ Ãß°¡]");
-						System.out.println("[Ãß°¡ÇÒ ÇĞ»ıÀÇ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä][Á¾·á: q]");
+						System.out.println("\n[ì •ë³´ ì¶”ê°€]");
+						System.out.println("[ì¶”ê°€í•  í•™ìƒì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”][ì¢…ë£Œ: q]");
 
-						System.out.print("ÇĞ»ı ÀÌ¸§> ");
+						System.out.print("í•™ìƒ ì´ë¦„> ");
 						String name = sc.next();
-						if(name.equals("q")) {
+						if (name.equals("q")) {
 							System.out.println();
-							break; 
+							break;
 						}
 
-						System.out.print("±¹¾î Á¡¼ö> ");
+						System.out.print("êµ­ì–´ ì ìˆ˜> ");
 						int kor = sc.nextInt();
 
-						System.out.print("¿µ¾î Á¡¼ö> ");
+						System.out.print("ì˜ì–´ ì ìˆ˜> ");
 						int eng = sc.nextInt();
 
-						System.out.print("¼öÇĞ Á¡¼ö> ");
+						System.out.print("ìˆ˜í•™ ì ìˆ˜> ");
 						int mat = sc.nextInt();
 
 						Student student = new Student(name, kor, eng, mat);
 						table.add(student);
-						System.out.println("[ÇØ´ç ÇĞ»ı Á¤º¸°¡ Ãß°¡µÇ¾ú½À´Ï´Ù]\n");
+						System.out.println("[í•´ë‹¹ í•™ìƒ ì •ë³´ê°€ ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤]\n");
 					}
 					break;
 				}
-				
-				/* 2. ¼ºÀûÇ¥ Ãâ·Â */
-				case 2:
-				{
-					System.out.println("\n=================[¼ºÀûÇ¥ Ãâ·Â]====================");
-					System.out.println(" ÇĞ»ıÀÌ¸§\t ±¹¾î\t ¿µ¾î\t ¼öÇĞ\t Æò±ÕÁ¡¼ö");
-					
+
+				/* 2. ì„±ì í‘œ ì¶œë ¥ */
+				case 2: {
+					System.out.println("\n=================[ì„±ì í‘œ ì¶œë ¥]====================");
+					System.out.println(" í•™ìƒì´ë¦„\t êµ­ì–´\t ì˜ì–´\t ìˆ˜í•™\t í‰ê· ì ìˆ˜");
+
 					Iterator<Student> iter = table.iterator();
-					while(iter.hasNext()) {
+					while (iter.hasNext()) {
 						Student student = iter.next();
 						String name = student.getName();
 						int kor = student.getKor();
 						int eng = student.getEng();
 						int mat = student.getMath();
-						
-						double avg = ( (int)((kor + eng + mat)/3.0*10+0.5) ) / 10.0;
-						
-						
-						System.out.println(" "+name+"\t "+kor+"\t "+eng+"\t "+mat +"\t "+ avg);
+
+						double avg = ((int) ((kor + eng + mat) / 3.0 * 10 + 0.5)) / 10.0;
+
+						System.out.println(" " + name + "\t " + kor + "\t " + eng + "\t " + mat + "\t " + avg);
 					}
 					System.out.println("===============================================\n");
 					break;
 				}
-				
-				/* 3. ÇĞ»ı Á¤º¸ ¼öÁ¤ */
-				case 3: 
-				{
-					System.out.println("\n[ÇĞ»ı Á¤º¸ ¼öÁ¤]");
-					System.out.println("[¼öÁ¤ÇÒ ÇĞ»ıÀÇ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä]");
+
+				/* 3. í•™ìƒ ì •ë³´ ìˆ˜ì • */
+				case 3: {
+					System.out.println("\n[í•™ìƒ ì •ë³´ ìˆ˜ì •]");
+					System.out.println("[ìˆ˜ì •í•  í•™ìƒì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”]");
 					String name = sc.next();
-					
+
 					Iterator<Student> iter = table.iterator();
-					while(iter.hasNext()) {
+					while (iter.hasNext()) {
 						Student student = iter.next();
-						if(name.equals(student.getName())) {
-							System.out.print("±¹¾î Á¡¼ö> ");
+						if (name.equals(student.getName())) {
+							System.out.print("êµ­ì–´ ì ìˆ˜> ");
 							int kor = sc.nextInt();
 							student.setKor(kor);
 
-							System.out.print("¿µ¾î Á¡¼ö> ");
+							System.out.print("ì˜ì–´ ì ìˆ˜> ");
 							int eng = sc.nextInt();
 							student.setEng(eng);
 
-							System.out.print("¼öÇĞ Á¡¼ö> ");
+							System.out.print("ìˆ˜í•™ ì ìˆ˜> ");
 							int mat = sc.nextInt();
 							student.setMath(mat);
 						}
 					}
-					System.out.println("[ÇØ´ç ÇĞ»ıÁ¤º¸°¡ ¼öÁ¤ µÇ¾ú½À´Ï´Ù]\n");
+					System.out.println("[í•´ë‹¹ í•™ìƒì •ë³´ê°€ ìˆ˜ì • ë˜ì—ˆìŠµë‹ˆë‹¤]\n");
 					break;
 				}
-				
-				/* 4. ÇĞ»ı Á¤º¸ »èÁ¦ */
-				case 4:
-				{
-					System.out.println("\n[ÇĞ»ı Á¤º¸ »èÁ¦]");
-					System.out.print("ÇĞ»ı ÀÌ¸§> ");
+
+				/* 4. í•™ìƒ ì •ë³´ ì‚­ì œ */
+				case 4: {
+					System.out.println("\n[í•™ìƒ ì •ë³´ ì‚­ì œ]");
+					System.out.print("í•™ìƒ ì´ë¦„> ");
 					String name = sc.next();
-					
+
 					Iterator<Student> iter = table.iterator();
-					while(iter.hasNext()) {
+					while (iter.hasNext()) {
 						Student student = iter.next();
-						if(name.equals(student.getName())) {
+						if (name.equals(student.getName())) {
 							table.remove(student);
 						}
 					}
-					System.out.println("[ÇØ´ç ÇĞ»ıÀÇ Á¤º¸°¡ »èÁ¦µÇ¾ú½À´Ï´Ù]\n");
+					System.out.println("[í•´ë‹¹ í•™ìƒì˜ ì •ë³´ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤]\n");
 					break;
 				}
-				
-				/* 5. ÇÁ·Î±×·¥ Á¾·á */
+
+				/* 5. í”„ë¡œê·¸ë¨ ì¢…ë£Œ */
 				case 5:
-					System.out.println("\n[ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù]");
+					System.out.println("\n[í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤]");
 					sc.close();
 					System.exit(0);
+				}
+			} catch(ConcurrentModificationException e) {
+				System.out.println("[í•´ë‹¹ í•™ìƒì˜ ì •ë³´ê°€ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤]\n");
+//				e.printStackTrace();
+			} catch(Exception e) {
+				System.out.println("\n[ì˜ëª»ëœ ì…ë ¥ê°’ì…ë‹ˆë‹¤. ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”]\n");
+//				e.printStackTrace();
 			}
 		}
 	}
