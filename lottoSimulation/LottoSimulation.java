@@ -9,18 +9,18 @@ import java.util.Set;
 
 /**
  * 2022.05.07
- * Ãß°¡ÇÏ°í ½ÍÀº ±â´Éµé.
- * 1. ¼öµ¿À¸·Î ¹øÈ£ ÀÔ·ÂÇÒ ¶§ ÇÑÁÙ¿¡ ¼ıÀÚ¸¶´Ù °ø¹éÀ» ³Ö¾îÁÖ°í ÀÔ·ÂÇÏ°ÔÇÑ µÚ ÀÔ·ÂÇÑ ¹®ÀÚ¿­À» °ø¹éÀ» ±¸ºĞÀÚ·Î ¹øÈ£¸¦ ÃßÃâ. 
- * ÇØ´ç ¹øÈ£·Î ¹è¿­ »ı¼º ¹× Set¿¡ ÀúÀåÇÏ±â.
+ * ì¶”ê°€í•˜ê³  ì‹¶ì€ ê¸°ëŠ¥ë“¤.
+ * 1. ìˆ˜ë™ìœ¼ë¡œ ë²ˆí˜¸ ì…ë ¥í•  ë•Œ í•œì¤„ì— ìˆ«ìë§ˆë‹¤ ê³µë°±ì„ ë„£ì–´ì£¼ê³  ì…ë ¥í•˜ê²Œí•œ ë’¤ ì…ë ¥í•œ ë¬¸ìì—´ì„ ê³µë°±ì„ êµ¬ë¶„ìë¡œ ë²ˆí˜¸ë¥¼ ì¶”ì¶œ. 
+ * í•´ë‹¹ ë²ˆí˜¸ë¡œ ë°°ì—´ ìƒì„± ë° Setì— ì €ì¥í•˜ê¸°.
  * 
- * ¾Ë°Ô µÈ Á¡
- * 1. Á¦³×¸¯ Å¸ÀÔº¯¼ö¿¡ ¹è¿­µµ ´ëÀÔ °¡´É.
- * 2. return¹®Àº ¸Ş¼Òµå¸¦ Á¾·áÇÏ¹Ç·Î while¹®À» ºüÁ®³ª¿À·Á¸é breakÀ» ÀÌ¿ë.
- * 3. ¹è¿­ÀÇ ¿ä¼ÒÀÇ ¼ø¼­¿Í °ªÀ» ºñ±³ÇÏ·Á¸é Arrays.equals() ¸Ş¼­µå¸¦ ÀÌ¿ë. 
- * 4. == ¿¬»êÀÚ´Â ÁÖ¼Ò°ªÀ» ºñ±³ÇÏ±â ¶§¹®¿¡ ¹è¿­ ¿ä¼ÒÀÇ ¼ø¼­¿Í °ªÀÌ °°¾Æµµ ÁÖ¼Ò°¡ ´Ù¸£¸é false°¡ ¶ä.
+ * ì•Œê²Œ ëœ ì 
+ * 1. ì œë„¤ë¦­ íƒ€ì…ë³€ìˆ˜ì— ë°°ì—´ë„ ëŒ€ì… ê°€ëŠ¥.
+ * 2. returnë¬¸ì€ ë©”ì†Œë“œë¥¼ ì¢…ë£Œí•˜ë¯€ë¡œ whileë¬¸ì„ ë¹ ì ¸ë‚˜ì˜¤ë ¤ë©´ breakì„ ì´ìš©.
+ * 3. ë°°ì—´ì˜ ìš”ì†Œì˜ ìˆœì„œì™€ ê°’ì„ ë¹„êµí•˜ë ¤ë©´ Arrays.equals() ë©”ì„œë“œë¥¼ ì´ìš©. 
+ * 4. == ì—°ì‚°ìëŠ” ì£¼ì†Œê°’ì„ ë¹„êµí•˜ê¸° ë•Œë¬¸ì— ë°°ì—´ ìš”ì†Œì˜ ìˆœì„œì™€ ê°’ì´ ê°™ì•„ë„ ì£¼ì†Œê°€ ë‹¤ë¥´ë©´ falseê°€ ëœ¸.
  * 
- * ±Ã±İÇÑ Á¡
- * 1. 49Çà°ú 79Çà¿¡¼­ int[] lotto = new int[6]À» for¹® À§¿¡´Ù ¾²°Ô µÇ¸é Set °´Ã¼¿¡ °°Àº °ªÀÌ 6°³ ÀúÀåµÊ.
+ * ê¶ê¸ˆí•œ ì 
+ * 1. 49í–‰ê³¼ 79í–‰ì—ì„œ int[] lotto = new int[6]ì„ forë¬¸ ìœ„ì—ë‹¤ ì“°ê²Œ ë˜ë©´ Set ê°ì²´ì— ê°™ì€ ê°’ì´ 6ê°œ ì €ì¥ë¨.
  * 
  */
 public class LottoSimulation {
@@ -28,35 +28,35 @@ public class LottoSimulation {
 	
 	public static void main(String[] args) {
 		System.out.println("===================================");
-		System.out.println("      [·Î¶Ç ¹øÈ£ »ı¼º ¹× ½Ã¹Ä·¹ÀÌ¼Ç]       ");
+		System.out.println("      [ë¡œë˜ ë²ˆí˜¸ ìƒì„± ë° ì‹œë®¬ë ˆì´ì…˜]       ");
 		System.out.println("===================================");
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("¼öµ¿/ÀÚµ¿À» ¼±ÅÃÇØÁÖ¼¼¿ä");
-		System.out.println("1. ¼öµ¿");
-		System.out.println("2. ÀÚµ¿");
+		System.out.println("ìˆ˜ë™/ìë™ì„ ì„ íƒí•´ì£¼ì„¸ìš”");
+		System.out.println("1. ìˆ˜ë™");
+		System.out.println("2. ìë™");
 		System.out.print("> ");
 		
 		String kind = sc.next();
 		
 		while (true) {
-			/* ¼öµ¿ ¹øÈ£ */
-			if (kind.equals("1") || kind.equals("¼öµ¿")) {
-				System.out.print("\n°ÔÀÓ ¼ö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä(ÃÖ´ë:5°ÔÀÓ)> ");
+			/* ìˆ˜ë™ ë²ˆí˜¸ */
+			if (kind.equals("1") || kind.equals("ìˆ˜ë™")) {
+				System.out.print("\nê²Œì„ ìˆ˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”(ìµœëŒ€:5ê²Œì„)> ");
 				int game = sc.nextInt();
 				
-				/* ¼öµ¿ ¹øÈ£ ÀÔ·Â */
+				/* ìˆ˜ë™ ë²ˆí˜¸ ì…ë ¥ */
 				for(int i=0; i<game; i++) {
 					int[] lotto = new int[6];
 					
-					System.out.println("\t[" + (i+1) + "¹øÂ° Á¶ÇÕ]");
+					System.out.println("\t[" + (i+1) + "ë²ˆì§¸ ì¡°í•©]");
 					for(int j=0; j<6; j++) {
-						System.out.print((j+1) + "¹øÂ° ¹øÈ£ ÀÔ·Â> ");
+						System.out.print((j+1) + "ë²ˆì§¸ ë²ˆí˜¸ ì…ë ¥> ");
 						int manual = sc.nextInt();
 						lotto[j] = manual;
 						
-						/* Áßº¹ Á¦°Å */
+						/* ì¤‘ë³µ ì œê±° */
 						if(j > 0) {
 							for(int k=0; k<j; k++) {
 								if(lotto[k] == lotto[j]) {
@@ -71,12 +71,12 @@ public class LottoSimulation {
 					break;
 				}
 				
-			/* ÀÚµ¿ ¹øÈ£ */
-			} else if (kind.equals("2") || kind.equals("ÀÚµ¿")) {
-				System.out.print("\n°ÔÀÓ ¼ö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä(ÃÖ´ë:5°ÔÀÓ)> ");
+			/* ìë™ ë²ˆí˜¸ */
+			} else if (kind.equals("2") || kind.equals("ìë™")) {
+				System.out.print("\nê²Œì„ ìˆ˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”(ìµœëŒ€:5ê²Œì„)> ");
 				int game = sc.nextInt();
 				
-				/* ÀÚµ¿ ¹øÈ£ »ı¼º */
+				/* ìë™ ë²ˆí˜¸ ìƒì„± */
 				for(int i=0; i<game; i++) {
 					int[] lotto = new int[6];
 					
@@ -84,7 +84,7 @@ public class LottoSimulation {
 						int auto = (int)(Math.random()*45+1);
 						lotto[j] = auto;
 						
-						/* Áßº¹ Á¦°Å */
+						/* ì¤‘ë³µ ì œê±° */
 						if(j > 0) {
 							for(int k=0; k<j; k++) {
 								if(lotto[k] == lotto[j]) {
@@ -95,7 +95,7 @@ public class LottoSimulation {
 					}
 					Arrays.sort(lotto);
 					
-					/* Áßº¹ Á¶ÇÕ Á¦°Å */
+					/* ì¤‘ë³µ ì¡°í•© ì œê±° */
 					if(lottoSet.contains(lotto)) {
 						i--;
 					} else {
@@ -104,34 +104,32 @@ public class LottoSimulation {
 				}
 				break;
 			
-			/* ÀÔ·Â ¿À·ù */
+			/* ì…ë ¥ ì˜¤ë¥˜ */
 			} else {
-				System.out.print("´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä> ");
+				System.out.print("ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”> ");
 				kind = sc.next();
 				continue;
 			}
 		}
 		
-		/* ·Î¶Ç Á¶ÇÕ Ãâ·Â */
-		System.out.println("\n=====[ ·Î¶Ç Á¶ÇÕ Ãâ·Â ]======");
-		
+		/* ë¡œë˜ ì¡°í•© ì¶œë ¥ */
+		System.out.println("\n=====[ ë¡œë˜ ì¡°í•© ì¶œë ¥ ]======");
 		Iterator<int[]> iter = lottoSet.iterator();
 		while(iter.hasNext()) {
 			int[] lotto = iter.next();
 			System.out.println(Arrays.toString(lotto));
 		}
-		
 		System.out.println("==========================");
 		
-		System.out.print("½Ã¹Ä·¹ÀÌ¼ÇÀ» µ¹¸®½Ã°Ú½À´Ï±î(y/n)> ");
+		System.out.print("ì‹œë®¬ë ˆì´ì…˜ì„ ëŒë¦¬ì‹œê² ìŠµë‹ˆê¹Œ(y/n)> ");
 		String simul = sc.next();
 		
 		if(simul.equals("y")) {
 			int count = 0;
 			
-			/* ºñ±³ ¹øÈ£ »ı¼º*/
+			/* ë¹„êµ ë²ˆí˜¸ ìƒì„±*/
 			while(true) {
-				count++; //¹İº¹ È½¼ö 
+				count++; //ë°˜ë³µ íšŸìˆ˜ 
 				int[] correct = new int[6];
 				for (int j = 0; j < 6; j++) {
 					int auto = (int) (Math.random() * 45 + 1);
@@ -146,18 +144,18 @@ public class LottoSimulation {
 					}
 				}
 				Arrays.sort(correct);
-				System.out.println(Arrays.toString(correct)); //ºñ±³ ¹øÈ£ Ãâ·Â
+				System.out.println(Arrays.toString(correct)); //ë¹„êµ ë²ˆí˜¸ ì¶œë ¥
 				
-				/* ³» ·Î¶Ç¹øÈ£¿Í ºñ±³ */
+				/* ë‚´ ë¡œë˜ë²ˆí˜¸ì™€ ë¹„êµ */
 				Iterator<int[]> iterator = lottoSet.iterator();
 				while (iterator.hasNext()) {
 					int[] myLotto = iterator.next();
 					
 					if (Arrays.equals(myLotto, correct)) {
 						DecimalFormat formatter = new DecimalFormat("###,###");
-						System.out.println("\n[½Ã¹Ä·¹ÀÌ¼Ç °á°ú]");
-						System.out.println(formatter.format(count) + "¹ø ½ÇÇà");
-						System.out.println(formatter.format(count*lottoSet.size()*1000) + "¿ø ¼Ò¿ä");
+						System.out.println("\n[ì‹œë®¬ë ˆì´ì…˜ ê²°ê³¼]");
+						System.out.println(formatter.format(count) + "ë²ˆ ì‹¤í–‰");
+						System.out.println(formatter.format(count*lottoSet.size()*1000) + "ì› ì†Œìš”");
 						return;
 					} else {
 						continue;
@@ -165,7 +163,7 @@ public class LottoSimulation {
 				}
 			}
 		} else {
-			System.out.println("[ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù]");
+			System.out.println("[í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤]");
 			System.exit(0);
 		}
 		
