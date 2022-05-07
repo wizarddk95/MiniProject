@@ -50,7 +50,7 @@ public class LottoSimulation {
 				for(int i=0; i<game; i++) {
 					int[] lotto = new int[6];
 					
-					System.out.println("\t[" + (i+1) + "번째 조합]");
+					System.out.println("\n\t[" + (i+1) + "번째 조합]");
 					for(int j=0; j<6; j++) {
 						System.out.print((j+1) + "번째 번호 입력> ");
 						int manual = sc.nextInt();
@@ -60,17 +60,16 @@ public class LottoSimulation {
 						if(j > 0) {
 							for(int k=0; k<j; k++) {
 								if(lotto[k] == lotto[j]) {
+									System.out.println("번호가 중복되었습니다. 다시 입력해 주세요.");
 									j--;
 								}
 							}
 						}
-						
 					}
 					Arrays.sort(lotto);
 					lottoSet.add(lotto);
-					break;
 				}
-				
+				break;
 			/* 자동 번호 */
 			} else if (kind.equals("2") || kind.equals("자동")) {
 				System.out.print("\n게임 수를 입력해주세요(최대:5게임)> ");
@@ -96,11 +95,13 @@ public class LottoSimulation {
 					Arrays.sort(lotto);
 					
 					/* 중복 조합 제거 */
-					if(lottoSet.contains(lotto)) {
-						i--;
-					} else {
-						lottoSet.add(lotto);
+					Iterator<int[]> iter = lottoSet.iterator();
+					while(iter.hasNext()) {
+						if(Arrays.equals(lotto, iter.next())) {
+							i--;
+						} 
 					}
+					lottoSet.add(lotto);
 				}
 				break;
 			
@@ -119,6 +120,7 @@ public class LottoSimulation {
 			int[] lotto = iter.next();
 			System.out.println(Arrays.toString(lotto));
 		}
+		
 		System.out.println("==========================");
 		
 		System.out.print("시뮬레이션을 돌리시겠습니까(y/n)> ");
@@ -153,9 +155,13 @@ public class LottoSimulation {
 					
 					if (Arrays.equals(myLotto, correct)) {
 						DecimalFormat formatter = new DecimalFormat("###,###");
-						System.out.println("\n[시뮬레이션 결과]");
-						System.out.println(formatter.format(count) + "번 실행");
-						System.out.println(formatter.format(count*lottoSet.size()*1000) + "원 소요");
+						System.out.println("\n=======[시뮬레이션 결과]=======\n");
+						System.out.println(Arrays.toString(myLotto) + " - 당첨번호");
+						System.out.println("\n" + formatter.format(count) + "번 실행 (x" + lottoSet.size() + " x1000 원 소요)");
+						System.out.println("\n===========================");
+						
+						sc.close();
+						System.out.println("\n[프로그램을 종료합니다]");
 						return;
 					} else {
 						continue;
