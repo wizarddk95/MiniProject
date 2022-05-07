@@ -1,0 +1,173 @@
+package lottoSimulation;
+
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Set;
+
+/**
+ * 2022.05.07
+ * 추가하고 싶은 기능들.
+ * 1. 수동으로 번호 입력할 때 한줄에 숫자마다 공백을 넣어주고 입력하게한 뒤 입력한 문자열을 공백을 구분자로 번호를 추출. 
+ * 해당 번호로 배열 생성 및 Set에 저장하기.
+ * 
+ * 알게 된 점
+ * 1. 제네릭 타입변수에 배열도 대입 가능.
+ * 2. return문은 메소드를 종료하므로 while문을 빠져나오려면 break을 이용.
+ * 3. 배열의 요소의 순서와 값을 비교하려면 Arrays.equals() 메서드를 이용. 
+ * 4. == 연산자는 주소값을 비교하기 때문에 배열 요소의 순서와 값이 같아도 주소가 다르면 false가 뜸.
+ * 
+ * 궁금한 점
+ * 1. 49행과 79행에서 int[] lotto = new int[6]을 for문 위에다 쓰게 되면 Set 객체에 같은 값이 6개 저장됨.
+ * 
+ */
+public class LottoSimulation {
+	static Set<int[]> lottoSet = new HashSet<>();
+	
+	public static void main(String[] args) {
+		System.out.println("===================================");
+		System.out.println("      [로또 번호 생성 및 시뮬레이션]       ");
+		System.out.println("===================================");
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("수동/자동을 선택해주세요");
+		System.out.println("1. 수동");
+		System.out.println("2. 자동");
+		System.out.print("> ");
+		
+		String kind = sc.next();
+		
+		while (true) {
+			/* 수동 번호 */
+			if (kind.equals("1") || kind.equals("수동")) {
+				System.out.print("\n게임 수를 입력해주세요(최대:5게임)> ");
+				int game = sc.nextInt();
+				
+				/* 수동 번호 입력 */
+				for(int i=0; i<game; i++) {
+					int[] lotto = new int[6];
+					
+					System.out.println("\t[" + (i+1) + "번째 조합]");
+					for(int j=0; j<6; j++) {
+						System.out.print((j+1) + "번째 번호 입력> ");
+						int manual = sc.nextInt();
+						lotto[j] = manual;
+						
+						/* 중복 제거 */
+						if(j > 0) {
+							for(int k=0; k<j; k++) {
+								if(lotto[k] == lotto[j]) {
+									j--;
+								}
+							}
+						}
+						
+					}
+					Arrays.sort(lotto);
+					lottoSet.add(lotto);
+					break;
+				}
+				
+			/* 자동 번호 */
+			} else if (kind.equals("2") || kind.equals("자동")) {
+				System.out.print("\n게임 수를 입력해주세요(최대:5게임)> ");
+				int game = sc.nextInt();
+				
+				/* 자동 번호 생성 */
+				for(int i=0; i<game; i++) {
+					int[] lotto = new int[6];
+					
+					for(int j=0; j<6; j++) {
+						int auto = (int)(Math.random()*45+1);
+						lotto[j] = auto;
+						
+						/* 중복 제거 */
+						if(j > 0) {
+							for(int k=0; k<j; k++) {
+								if(lotto[k] == lotto[j]) {
+									j--;
+								}
+							}
+						}
+					}
+					Arrays.sort(lotto);
+					
+					/* 중복 조합 제거 */
+					if(lottoSet.contains(lotto)) {
+						i--;
+					} else {
+						lottoSet.add(lotto);
+					}
+				}
+				break;
+			
+			/* 입력 오류 */
+			} else {
+				System.out.print("다시 입력해주세요> ");
+				kind = sc.next();
+				continue;
+			}
+		}
+		
+		/* 로또 조합 출력 */
+		System.out.println("\n=====[ 로또 조합 출력 ]======");
+		
+		Iterator<int[]> iter = lottoSet.iterator();
+		while(iter.hasNext()) {
+			int[] lotto = iter.next();
+			System.out.println(Arrays.toString(lotto));
+		}
+		
+		System.out.println("==========================");
+		
+		System.out.print("시뮬레이션을 돌리시겠습니까(y/n)> ");
+		String simul = sc.next();
+		
+		if(simul.equals("y")) {
+			int count = 0;
+			
+			/* 비교 번호 생성*/
+			while(true) {
+				count++; //반복 횟수 
+				int[] correct = new int[6];
+				for (int j = 0; j < 6; j++) {
+					int auto = (int) (Math.random() * 45 + 1);
+					correct[j] = auto;
+
+					if (j > 0) {
+						for (int k = 0; k < j; k++) {
+							if (correct[k] == correct[j]) {
+								j--;
+							}
+						}
+					}
+				}
+				Arrays.sort(correct);
+				System.out.println(Arrays.toString(correct)); //비교 번호 출력
+				
+				/* 내 로또번호와 비교 */
+				Iterator<int[]> iterator = lottoSet.iterator();
+				while (iterator.hasNext()) {
+					int[] myLotto = iterator.next();
+					
+					if (Arrays.equals(myLotto, correct)) {
+						DecimalFormat formatter = new DecimalFormat("###,###");
+						System.out.println("\n[시뮬레이션 결과]");
+						System.out.println(formatter.format(count) + "번 실행");
+						System.out.println(formatter.format(count*lottoSet.size()*1000) + "원 소요");
+						return;
+					} else {
+						continue;
+					}
+				}
+			}
+		} else {
+			System.out.println("[프로그램을 종료합니다]");
+			System.exit(0);
+		}
+		
+	}
+}
